@@ -38,7 +38,9 @@ export const App = () => {
         <FilterForms setList={setList} />
       </Content>
       <Content style={{ width: '100%', display: 'block' }}>
-        {list.length ? <ResultList list={list} /> : null}
+        {list.length !== 0 ?
+          <ResultList list={list} />
+          : null}
       </Content>
       {list.length === 0 ?
         <Footer style={{ position: 'fixed', bottom: 0, width: '100%' }}>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { Row, Col, Select, InputNumber, Button } from 'antd'
+import { Row, Col, Select, InputNumber, Button, message } from 'antd'
 
 import { parseTable } from '../assets/utils/parseTable'
 
@@ -55,8 +55,13 @@ export const FilterForms = ({ setList }) => {
       ]
     })
 
-    const parseList = parseTable(listResult.data.response)
-    setList(parseList)
+    if (listResult.error || listResult.data.response.length === 0) {
+      message.error('Lamento, nenhum resultado encontrado.')
+      setList([])
+    } else {
+      const parseList = parseTable(listResult.data.response)
+      setList(parseList)
+    }
   }
 
   const filteredTechs = techs.filter(o => !skills.includes(o))
